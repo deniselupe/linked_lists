@@ -44,7 +44,7 @@ class LinkedList
   end
 
   def head
-    puts @head.value
+    @head.value
   end
 
   def tail
@@ -54,7 +54,19 @@ class LinkedList
       current_node = current_node.next_node
     end
 
-    puts current_node.value
+    current_node.value
+  end
+
+  def at(index)
+    current_node = @head
+    values = []
+
+    while current_node != nil
+      values << current_node.value
+      current_node = current_node.next_node
+    end
+
+    values[index]
   end
 end
 
@@ -62,5 +74,4 @@ a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
-list.head
-list.tail
+p list.at(0); p list.at(1); p list.at(2); p list.at(3)
