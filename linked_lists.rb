@@ -10,6 +10,8 @@ end
 
 # Class for Linked List objects
 class LinkedList
+  attr_accessor :head
+
   def initialize(head)
     @head = head
   end
@@ -43,10 +45,6 @@ class LinkedList
     size
   end
 
-  def head
-    @head.value
-  end
-
   def tail
     current_node = @head
 
@@ -54,7 +52,7 @@ class LinkedList
       current_node = current_node.next_node
     end
 
-    current_node.value
+    current_node
   end
 
   def at(index)
@@ -68,10 +66,34 @@ class LinkedList
 
     current_node
   end
+
+  def pop
+    current_node = @head
+    next_node = current_node.next_node
+
+    while next_node.next_node != nil
+      current_node = next_node
+      next_node = next_node.next_node
+    end
+
+    current_node.next_node = nil
+  end
+
+  def contains(value)
+    current_node = @head
+
+    while current_node != nil
+      return true if current_node.value == value
+      current_node = current_node.next_node
+    end
+
+    false
+  end
 end
 
 a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
-p list.at(0); p list.at(1); p list.at(2); p list.at(3)
+list.pop
+p list.head
