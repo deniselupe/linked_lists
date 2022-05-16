@@ -10,8 +10,6 @@ end
 
 # Class for Linked List objects
 class LinkedList
-  attr_accessor :head
-
   def initialize(head)
     @head = head
   end
@@ -44,10 +42,25 @@ class LinkedList
 
     size
   end
+
+  def head
+    puts @head.value
+  end
+
+  def tail
+    current_node = @head
+
+    while current_node.next_node != nil
+      current_node = current_node.next_node
+    end
+
+    puts current_node.value
+  end
 end
 
 a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
-puts "Size of linked list is: #{list.size}"
+list.head
+list.tail
