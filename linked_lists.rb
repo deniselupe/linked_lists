@@ -10,16 +10,16 @@ end
 
 # Class for Linked List objects
 class LinkedList
-  attr_accessor :root
+  attr_accessor :head
 
-  def initialize(root)
-    @root = root
+  def initialize(head)
+    @head = head
   end
 
   def append(value)
-    current_node = @root
+    current_node = @head
 
-    # Location the Node with nil as their next_node value
+    # Locating the Node with nil as their next_node value
     while current_node.next_node != nil
       current_node = current_node.next_node
     end
@@ -28,9 +28,21 @@ class LinkedList
   end
 
   def prepend(value)
-    current_head = @root
-    @root = Node.new(value)
-    @root.next_node = current_head
+    current_head = @head
+    @head = Node.new(value)
+    @head.next_node = current_head
+  end
+
+  def size
+    size = 0
+    current_node = @head
+
+    while current_node != nil
+      current_node = current_node.next_node
+      size += 1
+    end
+
+    size
   end
 end
 
@@ -38,4 +50,4 @@ a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
-p list.root
+puts "Size of linked list is: #{list.size}"
