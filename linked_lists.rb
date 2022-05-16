@@ -59,14 +59,14 @@ class LinkedList
 
   def at(index)
     current_node = @head
-    values = []
+    count = 0
 
-    while current_node != nil
-      values << current_node.value
+    while count < index
       current_node = current_node.next_node
+      count += 1
     end
 
-    values[index]
+    current_node
   end
 end
 
