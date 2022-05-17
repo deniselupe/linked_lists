@@ -89,11 +89,23 @@ class LinkedList
 
     false
   end
+
+  def find(value)
+    current_node = @head
+    count = 0
+
+    until current_node.value == value
+      count += 1
+      current_node = current_node.next_node
+      return current_node if current_node == nil
+    end
+
+    count
+  end
 end
 
 a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
-list.pop
-p list.head
+p list.find('c'); p list.find('a'); p list.find('b'); p list.find('d')
