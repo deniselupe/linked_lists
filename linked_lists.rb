@@ -102,10 +102,22 @@ class LinkedList
 
     count
   end
+
+  def to_s
+    string = ''
+    current_node = @head
+
+    until current_node == nil
+      string += "(#{current_node.value}) -> "
+      current_node = current_node.next_node
+    end
+
+    string += "nil"
+  end
 end
 
 a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
-p list.find('c'); p list.find('a'); p list.find('b'); p list.find('d')
+puts list.to_s
