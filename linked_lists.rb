@@ -114,10 +114,23 @@ class LinkedList
 
     string += "nil"
   end
+
+  def insert_at(value, index)
+    return prepend(value) if index == 0
+    return append(value) if index == size
+    return nil if index < 0 || index > size
+
+    current_node = at(index)
+    preceding_node = at(index - 1)
+    new_node = Node.new(value)
+    new_node.next_node = current_node
+    preceding_node.next_node = new_node
+  end
 end
 
 a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
+list.insert_at('d', 2)
 puts list.to_s
