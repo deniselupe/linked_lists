@@ -20,10 +20,7 @@ class LinkedList
     current_node = @head
 
     # Locating the Node with nil as their next_node value
-    while current_node.next_node != nil
-      current_node = current_node.next_node
-    end
-
+    current_node = current_node.next_node until current_node.next_node.nil?
     current_node.next_node = Node.new(value)
   end
 
@@ -37,7 +34,7 @@ class LinkedList
     size = 0
     current_node = @head
 
-    while current_node != nil
+    until current_node.nil?
       current_node = current_node.next_node
       size += 1
     end
@@ -47,11 +44,7 @@ class LinkedList
 
   def tail
     current_node = @head
-
-    while current_node.next_node != nil
-      current_node = current_node.next_node
-    end
-
+    current_node = current_node.next_node until current_node.next_node.nil?
     current_node
   end
 
@@ -71,7 +64,7 @@ class LinkedList
     current_node = @head
     next_node = current_node.next_node
 
-    while next_node.next_node != nil
+    until next_node.next_node.nil?
       current_node = next_node
       next_node = next_node.next_node
     end
@@ -82,7 +75,7 @@ class LinkedList
   def contains(value)
     current_node = @head
 
-    while current_node != nil
+    until current_node.nil?
       return true if current_node.value == value
       current_node = current_node.next_node
     end
@@ -97,7 +90,7 @@ class LinkedList
     until current_node.value == value
       count += 1
       current_node = current_node.next_node
-      return current_node if current_node == nil
+      return current_node if current_node.nil?
     end
 
     count
@@ -107,12 +100,12 @@ class LinkedList
     string = ''
     current_node = @head
 
-    until current_node == nil
+    until current_node.nil?
       string += "(#{current_node.value}) -> "
       current_node = current_node.next_node
     end
 
-    string += "nil"
+    string += 'nil'
   end
 
   def insert_at(value, index)
@@ -126,11 +119,34 @@ class LinkedList
     new_node.next_node = current_node
     preceding_node.next_node = new_node
   end
+
+  def remove_at(index)
+    return nil if index < 0 || index >= size
+    current_node = at(index)
+    preceding_node = at(index - 1)
+
+    if !preceding_node.nil?
+      preceding_node.next_node = current_node.next_node
+    else
+      @head = current_node.next_node
+    end
+
+    current_node.next_node = nil
+  end
 end
 
 a = Node.new('a')
 list = LinkedList.new(a)
 list.append('b')
 list.prepend('c')
+puts list
 list.insert_at('d', 2)
-puts list.to_s
+puts list
+list.remove_at(2)
+puts list
+puts "Size of Linked List is #{list.size}"
+puts "Head of Linked List is #{list.head.value}"
+puts "Tail of Linked List is #{list.tail.value}"
+puts "#{list.at(2).value} is in Index 2"
+list.pop
+puts "Updated Linked List: #{list}"
